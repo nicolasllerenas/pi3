@@ -1,60 +1,31 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useTailwind } from "tailwind-rn";
+import Input from "../components/Input";
+import Button from "../components/Button";
 
 const LoginScreen = ({ navigation }) => {
   const tailwind = useTailwind();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    Alert.alert("Bienvenido", "Iniciaste sesión correctamente.");
-  };
 
   return (
     <View
-      style={tailwind("flex-1 justify-center items-center bg-gray-100 px-6")}
+      style={tailwind("flex-1 bg-background justify-center items-center px-6")}
     >
-      <Text style={tailwind("text-3xl font-bold text-gray-800 mb-4")}>
+      <Text style={tailwind("text-3xl font-bold text-primary mb-8")}>
         Bienvenido
       </Text>
-      <Text style={tailwind("text-base text-gray-500 mb-6")}>
-        Inicia sesión para continuar
-      </Text>
-
-      <TextInput
-        style={tailwind(
-          "w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-800 mb-4"
-        )}
-        placeholder="Correo Electrónico"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        placeholderTextColor="#aaa"
+      <Input placeholder="Correo electrónico" keyboardType="email-address" />
+      <Input placeholder="Contraseña" secureTextEntry />
+      <Button
+        title="Iniciar Sesión"
+        onPress={() => alert("Inicio de sesión exitoso")}
       />
-      <TextInput
-        style={tailwind(
-          "w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-800 mb-4"
-        )}
-        placeholder="Contraseña"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        placeholderTextColor="#aaa"
-      />
-
       <TouchableOpacity
-        style={tailwind("bg-blue-500 w-full py-3 rounded-lg items-center")}
-        onPress={handleLogin}
+        onPress={() => navigation.navigate("Register")}
+        style={tailwind("mt-4")}
       >
-        <Text style={tailwind("text-white font-bold text-lg")}>
-          Iniciar Sesión
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text style={tailwind("text-blue-500 mt-6 text-sm")}>
-          ¿No tienes una cuenta? Regístrate
+        <Text style={tailwind("text-primary text-sm font-semibold")}>
+          ¿No tienes cuenta? Regístrate
         </Text>
       </TouchableOpacity>
     </View>
